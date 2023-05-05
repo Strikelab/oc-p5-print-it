@@ -17,7 +17,7 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
-//--------------------------------//1
+//--------------------------------//
 //           variables            //
 //--------------------------------//
 //initialise for global scope
