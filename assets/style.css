@@ -213,8 +213,13 @@ header {
 #banner .arrow_left {
   margin-left: 10px;
 }
+
 #banner .arrow_right {
   margin-right: 10px;
+}
+#banner .arrow_right:hover,
+#banner .arrow_left:hover {
+  cursor: pointer;
 }
 /* Gestion des points du carrousel */
 .dots {
