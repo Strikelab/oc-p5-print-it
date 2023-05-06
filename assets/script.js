@@ -1,3 +1,9 @@
+//--------------------------------//
+//       JSON Data Format         //
+//--------------------------------//
+
+//---------slides datas-----------//
+
 const slides = [
   {
     image: "slide1.jpg",
@@ -17,9 +23,11 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
-//--------------------------------//1
+
+//--------------------------------//
 //           variables            //
 //--------------------------------//
+
 //initialise for global scope
 let shiftDirection = null;
 //copy slides for work on copy
@@ -31,7 +39,7 @@ let slideNumber = 1;
 //     Generate DOM elements       //
 //---------------------------------//
 
-//--------------banner-------------//
+//-----------banner-img------------//
 
 //select parent for banner and dots
 const divBanner = document.querySelector("#banner");
@@ -44,7 +52,7 @@ bannerImg.setAttribute("class", "banner-img");
 //add banner to DOM
 divBanner.appendChild(bannerImg);
 
-//--------------tagline------------//
+//--------banner-tagline----------//
 
 //create element p for tagline
 let bannerTagLine = document.createElement("p");
@@ -53,7 +61,7 @@ bannerTagLine.innerHTML = slidesToShow[0].tagLine;
 //add tagline to DOM
 divBanner.appendChild(bannerTagLine);
 
-//---------------dots--------------//
+//---------banner-dots------------//
 
 //select parent div for dots
 const divDots = document.querySelector("#banner .dots");
@@ -104,13 +112,13 @@ function shiftAndShow(shiftDirection, arrayToShift) {
   if (shiftDirection === "left") {
     //pop() method remove and return the last element of an array
     //unshift method add a new item at the begining on an array
-    //move elements to the left in slidesToShowArray
+    //move elements in array to the left
     arrayToShift.unshift(arrayToShift.pop());
   }
   if (shiftDirection === "right") {
     //shift() method remove and return the first element of an array
     //push method add a new item to the end of an array
-    //move elements in array to the left
+    //move elements in array to the right
     arrayToShift.push(arrayToShift.shift());
   }
   //Show:
@@ -122,7 +130,7 @@ function shiftAndShow(shiftDirection, arrayToShift) {
 
 //----- function "active Dot" -----//
 
-// this function unset old dot_selected class and set it to a new one
+// this function unset current dot_selected class and set it to a new one according to the slide number
 function activeDot(shiftDirection) {
   if (shiftDirection === "left") {
     //infinite count 1-4-3-2-1... for dot activation
