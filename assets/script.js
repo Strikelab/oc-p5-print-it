@@ -39,11 +39,31 @@ let slideNumber = 1;
 //     Generate DOM elements       //
 //---------------------------------//
 
-//-----------banner-img------------//
-
 //select parent for banner img and dots
 const divBanner = document.querySelector("#banner");
-//create banner
+//regenerate divBanner content
+divBanner.innerHTML = "";
+
+//----------- banner arrows ------------//
+
+//create div arrow container
+let divArrow = document.createElement("div");
+//set class arrow to div
+divArrow.setAttribute("class", "arrow");
+// add div arrow to DOM
+divBanner.appendChild(divArrow);
+//left arrow
+let leftArrow = document.createElement("img");
+leftArrow.setAttribute("class", "arrow_left");
+leftArrow.src = "./assets/images/arrow_left.png";
+divArrow.appendChild(leftArrow);
+//right arrow
+let rightArrow = document.createElement("img");
+rightArrow.setAttribute("class", "arrow_right");
+rightArrow.src = "./assets/images/arrow_right.png";
+divArrow.appendChild(rightArrow);
+//----------- banner img ------------//
+//create banner img
 let bannerImg = document.createElement("img");
 //set src to banner img
 bannerImg.src = `./assets/images/slideshow/${slidesToShow[0].image}`;
@@ -63,8 +83,13 @@ divBanner.appendChild(bannerTagLine);
 
 //---------banner-dots------------//
 
+//div dots container
+let divDots = document.createElement("div");
+divDots.setAttribute("class", "dots");
+divBanner.appendChild(divDots);
+
 //select parent div for dots
-const divDots = document.querySelector("#banner .dots");
+// const divDots = document.querySelector("#banner .dots");
 //genenerate 1 bullet point for an object in slides list.
 for (let i = 0; i < slidesToShow.length; i++) {
   //create div bullet point
@@ -158,7 +183,7 @@ function activeDot(shiftDirection) {
   //desactive dot
   dotActive.classList.remove("dot_selected");
   //select dot according to slide number
-  let dotToActive = divDots.querySelector(`:nth-child(${slideNumber})`)
+  let dotToActive = divDots.querySelector(`:nth-child(${slideNumber})`);
   //activate this dot
   dotToActive.classList.add("dot_selected");
 }
