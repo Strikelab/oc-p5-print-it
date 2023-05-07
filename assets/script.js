@@ -41,7 +41,7 @@ let slideNumber = 1;
 
 //-----------banner-img------------//
 
-//select parent for banner and dots
+//select parent for banner img and dots
 const divBanner = document.querySelector("#banner");
 //create banner
 let bannerImg = document.createElement("img");
@@ -72,7 +72,7 @@ for (let i = 0; i < slidesToShow.length; i++) {
   //add div bullet point to DOM
   divDots.appendChild(divDot);
   //set class to div bullet point
-  divDot.setAttribute("class", `dot dot--${i}`);
+  divDot.setAttribute("class", "dot");
   //active first bullet point
   if (i === 0) {
     divDot.classList.add("dot_selected");
@@ -104,7 +104,13 @@ document.addEventListener("click", function (clicBanner) {
 
 //--- function "shift and show" ---//
 
-// this function shift array elements and show the first element of the array.
+/**
+ * This function takes an array of objects and moves the first element
+ * to the right or to the left accodding to shiftDirection value
+ * @param {string} shiftDirection - values : "left" "right"
+ * @param {array} arrayToShift - takes an array of objects as argument
+ */
+
 function shiftAndShow(shiftDirection, arrayToShift) {
   //shift:
   //elements to show will ever be the first one of the arrayToShift
@@ -113,12 +119,14 @@ function shiftAndShow(shiftDirection, arrayToShift) {
     //pop() method remove and return the last element of an array
     //unshift method add a new item at the begining on an array
     //move elements in array to the left
+    //example : fruits = [apple, strawberry, raspberry] --> fruits = [raspberry, apple, strawberry]
     arrayToShift.unshift(arrayToShift.pop());
   }
   if (shiftDirection === "right") {
     //shift() method remove and return the first element of an array
     //push method add a new item to the end of an array
     //move elements in array to the right
+    //example : fruits = [apple, strawberry, raspberry] --> fruits = [strawberry, raspberry, apple]
     arrayToShift.push(arrayToShift.shift());
   }
   //Show:
@@ -130,7 +138,12 @@ function shiftAndShow(shiftDirection, arrayToShift) {
 
 //----- function "active Dot" -----//
 
-// this function unset current dot_selected class and set it to a new one according to the slide number
+/**
+ *  this function unset current .dot_selected class
+ *  and set it to a new one according to the slide number
+ * @param {string} shiftDirection - values : "left" "right"
+ */
+
 function activeDot(shiftDirection) {
   if (shiftDirection === "left") {
     //infinite count 1-4-3-2-1... for dot activation
@@ -145,7 +158,7 @@ function activeDot(shiftDirection) {
   //desactive dot
   dotActive.classList.remove("dot_selected");
   //select dot according to slide number
-  let dotToActive = document.querySelector(`.dot--${slideNumber - 1}`);
+  let dotToActive = divDots.querySelector(`:nth-child(${slideNumber})`)
   //activate this dot
   dotToActive.classList.add("dot_selected");
 }
