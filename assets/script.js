@@ -31,7 +31,7 @@ const slides = [
 //initialise for global scope
 let shiftDirection = null;
 //copy slides for work on copy
-let slidesToShow = slides;
+let slidesToShow = Array.from(slides);
 // initialize slideNumber
 let slideNumber = 1;
 
@@ -39,57 +39,54 @@ let slideNumber = 1;
 //     Generate DOM elements       //
 //---------------------------------//
 
-//select parent for banner img and dots
+//select parent node for childs
 const divBanner = document.querySelector("#banner");
-//regenerate divBanner content
-divBanner.innerHTML = "";
 
 //----------- banner arrows ------------//
-
 //create div arrow container
-let divArrow = document.createElement("div");
+const divArrow = document.createElement("div");
 //set class arrow to div
 divArrow.setAttribute("class", "arrow");
-// add div arrow to DOM
-divBanner.appendChild(divArrow);
+
 //left arrow
-let leftArrow = document.createElement("img");
+const leftArrow = document.createElement("img");
 leftArrow.setAttribute("class", "arrow_left");
 leftArrow.src = "./assets/images/arrow_left.png";
-divArrow.appendChild(leftArrow);
+
 //right arrow
-let rightArrow = document.createElement("img");
+const rightArrow = document.createElement("img");
 rightArrow.setAttribute("class", "arrow_right");
 rightArrow.src = "./assets/images/arrow_right.png";
-divArrow.appendChild(rightArrow);
+
 //----------- banner img ------------//
 //create banner img
-let bannerImg = document.createElement("img");
+const bannerImg = document.createElement("img");
 //set src to banner img
 bannerImg.src = `./assets/images/slideshow/${slidesToShow[0].image}`;
 //set class to banner img
 bannerImg.setAttribute("class", "banner-img");
-//add banner to DOM
-divBanner.appendChild(bannerImg);
 
 //--------banner-tagline----------//
-
 //create element p for tagline
-let bannerTagLine = document.createElement("p");
+const bannerTagLine = document.createElement("p");
 //insert html tagline inside p
 bannerTagLine.innerHTML = slidesToShow[0].tagLine;
-//add tagline to DOM
-divBanner.appendChild(bannerTagLine);
 
 //---------banner-dots------------//
-
 //div dots container
-let divDots = document.createElement("div");
+const divDots = document.createElement("div");
 divDots.setAttribute("class", "dots");
+
+//regenerate divBanner content
+divBanner.innerHTML = "";
+// add elements to DOM arrow to DOM
+divBanner.appendChild(divArrow);
+divArrow.appendChild(leftArrow);
+divArrow.appendChild(rightArrow);
+divBanner.appendChild(bannerImg);
+divBanner.appendChild(bannerTagLine);
 divBanner.appendChild(divDots);
 
-//select parent div for dots
-// const divDots = document.querySelector("#banner .dots");
 //genenerate 1 bullet point for an object in slides list.
 for (let i = 0; i < slidesToShow.length; i++) {
   //create div bullet point
