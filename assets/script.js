@@ -39,7 +39,7 @@ let slideNumber = 1;
 //     Generate DOM elements       //
 //---------------------------------//
 
-//select parent node for childs
+//select parent banner node for childs
 const divBanner = document.querySelector("#banner");
 
 //----------- banner arrows ------------//
@@ -69,7 +69,7 @@ bannerImg.setAttribute("class", "banner-img");
 //--------banner-tagline----------//
 //create element p for tagline
 const bannerTagLine = document.createElement("p");
-//insert html tagline inside p
+//insert html tagline inside p from slidesToShow 
 bannerTagLine.innerHTML = slidesToShow[0].tagLine;
 
 //---------banner-dots------------//
@@ -79,7 +79,7 @@ divDots.setAttribute("class", "dots");
 
 //regenerate divBanner content
 divBanner.innerHTML = "";
-// add elements to DOM arrow to DOM
+// add previously created elements to DOM
 divBanner.appendChild(divArrow);
 divArrow.appendChild(leftArrow);
 divArrow.appendChild(rightArrow);
@@ -87,7 +87,7 @@ divBanner.appendChild(bannerImg);
 divBanner.appendChild(bannerTagLine);
 divBanner.appendChild(divDots);
 
-//genenerate 1 bullet point for an object in slides list.
+//genenerate 1 bullet point by object in slidesToShow array.
 for (let i = 0; i < slidesToShow.length; i++) {
   //create div bullet point
   let divDot = document.createElement("div");
@@ -102,25 +102,6 @@ for (let i = 0; i < slidesToShow.length; i++) {
 }
 
 //---------------------------------//
-//      click event Listener       //
-//---------------------------------//
-
-document.addEventListener("click", function (clicBanner) {
-  //click on left arrow
-  if (clicBanner.target.matches(".arrow_left")) {
-    shiftDirection = "left";
-    shiftAndShow(shiftDirection, slidesToShow);
-    activeDot(shiftDirection);
-  }
-  //click on right arrow
-  if (clicBanner.target.matches(".arrow_right")) {
-    shiftDirection = "right";
-    shiftAndShow(shiftDirection, slidesToShow);
-    activeDot(shiftDirection);
-  }
-});
-
-//---------------------------------//
 //            functions            //
 //---------------------------------//
 
@@ -129,7 +110,7 @@ document.addEventListener("click", function (clicBanner) {
 /**
  * This function takes an array of objects and moves the first element
  * to the right or to the left accodding to shiftDirection value
- * @param {string} shiftDirection - values : "left" "right"
+ * @param {string} shiftDirection - values : "left" , "right"
  * @param {array} arrayToShift - takes an array of objects as argument
  */
 
@@ -163,7 +144,7 @@ function shiftAndShow(shiftDirection, arrayToShift) {
 /**
  *  this function unset current .dot_selected class
  *  and set it to a new one according to the slide number
- * @param {string} shiftDirection - values : "left" "right"
+ * @param {string} shiftDirection - values : "left" , "right"
  */
 
 function activeDot(shiftDirection) {
@@ -177,10 +158,31 @@ function activeDot(shiftDirection) {
   }
   //select dot active
   let dotActive = document.querySelector(".dot_selected");
-  //desactive dot
+  //desactive dot by removing .dot_selected class
   dotActive.classList.remove("dot_selected");
   //select dot according to slide number
   let dotToActive = divDots.querySelector(`:nth-child(${slideNumber})`);
-  //activate this dot
+  //activate this dot by adding .dot_selected class
   dotToActive.classList.add("dot_selected");
 }
+
+//---------------------------------//
+//      click event Listener       //
+//---------------------------------//
+
+document.addEventListener("click", function (clicBanner) {
+  //click on left arrow
+  if (clicBanner.target.matches(".arrow_left")) {
+    shiftDirection = "left";
+    //call 2 functions
+    shiftAndShow(shiftDirection, slidesToShow);
+    activeDot(shiftDirection);
+  }
+  //click on right arrow
+  if (clicBanner.target.matches(".arrow_right")) {
+    shiftDirection = "right";
+    shiftAndShow(shiftDirection, slidesToShow);
+    activeDot(shiftDirection);
+  }
+});
+
