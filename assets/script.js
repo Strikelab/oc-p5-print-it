@@ -22,6 +22,8 @@ const slides = [
     image: "slide4.png",
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
+  
+  
 ];
 
 //--------------------------------//
@@ -65,6 +67,7 @@ const bannerImg = document.createElement("img");
 bannerImg.src = `./assets/images/slideshow/${slidesToShow[0].image}`;
 //set class to banner img
 bannerImg.setAttribute("class", "banner-img");
+bannerImg.setAttribute("alt", `slide-picture-${slideNumber}`);
 
 //--------banner-tagline----------//
 //create element p for tagline
@@ -133,9 +136,11 @@ function shiftAndShow(shiftDirection, arrayToShift) {
     arrayToShift.push(arrayToShift.shift());
   }
   //Show:
-  //change src img according to json list
+  //change src img according to list
   bannerImg.src = `./assets/images/slideshow/${arrayToShift[0].image}`;
-  //change banner tagline according to json list
+  //change alt img attribute according to slide number
+  bannerImg.setAttribute("alt", `slide-picture-${slideNumber}`);
+  //change banner tagline according to list
   bannerTagLine.innerHTML = arrayToShift[0].tagLine;
 }
 
@@ -175,14 +180,16 @@ document.addEventListener("click", function (clicBanner) {
   if (clicBanner.target.matches(".arrow_left")) {
     shiftDirection = "left";
     //call 2 functions
-    shiftAndShow(shiftDirection, slidesToShow);
     activeDot(shiftDirection);
+    shiftAndShow(shiftDirection, slidesToShow);
+   
   }
   //click on right arrow
   if (clicBanner.target.matches(".arrow_right")) {
     shiftDirection = "right";
-    shiftAndShow(shiftDirection, slidesToShow);
     activeDot(shiftDirection);
+    shiftAndShow(shiftDirection, slidesToShow);
+    
   }
 });
 
